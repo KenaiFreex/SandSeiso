@@ -1,0 +1,101 @@
+		<h1 style="background-color:Tomato;">SandSeiso</h1>
+		<h1 style="color:DodgerBlue;">Control GPIO</h1>
+
+		<h2><p id="led1" >GPIO17 OFF</p> <input type="checkbox" id="light1"> </h2>
+		<h2><p id="led2" >GPIO18 OFF</p> <input type="checkbox" id="light2"> </h2>
+		<h2><p id="led3" >GPIO19 OFF</p> <input type="checkbox" id="light3"> </h2>
+		<h2><p id="led4" >GPIO20 OFF</p> <input type="checkbox" id="light4"> </h2>
+
+		<p id="control" > </p>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> <!-- include socket.io client side script -->
+
+		<script>
+			var socket = io("192.168.1.72");//load socket.io-client and connect to the host that serves the page
+			window.addEventListener("load", function(){ 		//when page loads
+			  var lightbox1 = document.getElementById("light1"); 
+				var lightbox2 = document.getElementById("light2"); 
+
+			  var lightbox3 = document.getElementById("light3"); 
+
+			  var lightbox4 = document.getElementById("light4"); 
+
+			  lightbox1.addEventListener("change", function() { 	//add event listener for when checkbox changes
+			    socket.emit("gpio17", Number(this.checked)); 	//send button status to server (as 1 or 0)
+			  });
+
+			  lightbox2.addEventListener("change", function() { 	//add event listener for when checkbox changes
+			    socket.emit("gpio18", Number(this.checked)); 	//send button status to server (as 1 or 0)
+			  });
+
+			  lightbox3.addEventListener("change", function() { 	//add event listener for when checkbox changes
+			    socket.emit("gpio19", Number(this.checked)); 	//send button status to server (as 1 or 0)
+			  });
+
+			  lightbox4.addEventListener("change", function() { 	//add event listener for when checkbox changes
+			    socket.emit("gpio20", Number(this.checked)); 	//send button status to server (as 1 or 0)
+			  });
+
+
+			});
+			socket.on('gpio17', function (data) { 				//get button status from client
+			  var element = document.getElementById("led1");
+			  document.getElementById("light1").checked = data; 	//change checkbox according to push button on Raspberry Pi
+			  socket.emit("gpio17", data); //send push button status to back to server
+			  if(data == 0){
+			  	element.setAttribute("type", "color");
+			  	element.innerHTML = "GPIO17 OFF";
+			  }
+			  else{
+			  	element.setAttribute("type", "color");
+			  	element.innerHTML = "GPIO17 ON";
+			  }
+			});
+
+			socket.on('gpio18', function (data) { 				//get button status from client
+			  var element = document.getElementById("led2");
+			  document.getElementById("light2").checked = data; 	//change checkbox according to push button on Raspberry Pi
+			  socket.emit("gpio18", data); //send push button status to back to server
+			  if(data == 0){
+			  	element.setAttribute("type", "color");
+			  	element.innerHTML = "GPIO18 OFF";
+			  }
+			  else{
+			  	element.setAttribute("type", "color");
+			  	element.innerHTML = "GPIO18 ON";
+			  }
+			});
+
+			socket.on('gpio19', function (data) { 				//get button status from client
+			  var element = document.getElementById("led3");
+			  document.getElementById("light3").checked = data; 	//change checkbox according to push button on Raspberry Pi
+			  socket.emit("gpio19", data); //send push button status to back to server
+			  if(data == 0){
+			  	element.setAttribute("type", "color");
+			  	element.innerHTML = "GPIO19 OFF";
+			  }
+			  else{
+			  	element.setAttribute("type", "color");
+			  	element.innerHTML = "GPIO19 ON";
+			  }
+			});
+
+
+			socket.on('gpio20', function (data) { 				//get button status from client
+			  var element = document.getElementById("led4");
+			  document.getElementById("light4").checked = data; 	//change checkbox according to push button on Raspberry Pi
+			  socket.emit("gpio20", data); //send push button status to back to server
+			  if(data == 0){
+			  	element.setAttribute("type", "color");
+			  	element.innerHTML = "GPIO20 OFF";
+			  }
+			  else{
+			  	element.setAttribute("type", "color");
+			  	element.innerHTML = "GPIO20 ON";
+			  }
+			});
+
+
+
+
+		</script>
