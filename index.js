@@ -44,6 +44,7 @@ server.listen(80, () => {
   console.log('Escuchando en puerto 3000');
 
 });
+const paso = 5;
 
 //--------------------------------//
 /////////////WebSOckets/////////////////
@@ -52,22 +53,26 @@ io.sockets.on('connection', function (socket) { // WebSocket Connection
 
   socket.on("arriba", (data) => {
 
-
-    direction.ActivarGPIO("arriba", data);
+    tiempo = (data.tiempo/1000)*10;
+    let pwmLevel = (tiempo*paso<0)?0:(tiempo*paso>255)?255:tiempo*paso;
+    direction.ActivarGPIO("arriba", pwmLevel , data);
 
   });
 
   socket.on("izquierda", (data) => {
-    direction.ActivarGPIO("izquierda", data);
+    direction.ActivarGPIO("izquierda", 50, data);
 
   });
   socket.on("derecha", (data) => {
 
-    direction.ActivarGPIO("derecha", data);
+    direction.ActivarGPIO("derecha", 50, data);
   });
   socket.on("abajo", (data) => {
 
-    direction.ActivarGPIO("abajo", data);
+    tiempo = (data.tiempo/1000)*10;
+    let pwmLevel = (tiempo*paso<0)?0:(tiempo*paso>255)?255:tiempo*paso;
+    direction.ActivarGPIO("abajo", pwmLevel , data);
+    
   });
 
 
