@@ -1,201 +1,80 @@
 var socket = io(); //load socket.io-client and connect to the host that serves the page
-
 window.addEventListener("load", function () {
-    //when page loads
-    var arriba = document.getElementById("arriba");
-    var izquierda = document.getElementById("izquierda");
-    var derecha = document.getElementById("derecha");
-    var abajo = document.getElementById("abajo");
 
-//ARRIBA//
+    var tiempo = 0;
+    var intervalDirection = [];
+    var j = 0;
 
-    arriba.addEventListener("touchstart", () => {
+    var eventos = {
+        "arriba": document.getElementById("arriba"),
+        "izquierda": document.getElementById("izquierda"),
+        "derecha": document.getElementById("derecha"),
+        "abajo": document.getElementById("abajo"),
+    };
 
-        var tiempo = 0;
 
-        TupInterval = window.setInterval(function () {
+    var emitirFinal = (event, eventInterval, boton) => {
 
-            socket.emit("arriba",{"mensaje": "Botón Arriba " + tiempo +"ms","estado": true});          
-            tiempo+=100;
-        }, 100); // <== runs every 10 milliseconds
-        
-    });
+        window.clearInterval(eventInterval);
+        socket.emit(boton, {
+            "mensaje": "Botón " + boton + " libre",
+            "estado": false
+        });
 
+        tiempo = 0;
+    };
 
-    arriba.addEventListener("touchend", () => {
-        
-        window.clearInterval(TupInterval);
-        socket.emit("arriba",{"mensaje": "Botón Arriba libre","estado": false});
 
-        
-    }); 
+    var emitirInicio = (event, boton) => {
 
+        socket.emit(boton, {
+            "mensaje": "Botón " + boton + " " + tiempo + "ms",
+            "estado": true,
+            "tiempo": tiempo
+        });
+        tiempo += 100;
 
+    };
 
-    arriba.addEventListener("mousedown", () => {
 
-        var tiempo = 0;
 
-        upInterval = window.setInterval(function () {
+    for (let i in eventos) {
+        //FOR PC
+        eventos[i].addEventListener("mousedown", (e) =>
+            intervalDirection[j] = window.setInterval((event) => emitirInicio(event, i), 100), false);
 
-            socket.emit("arriba",{"mensaje": "Botón Arriba " + tiempo +"ms","estado": true});         
-           tiempo+=100;
-        }, 100); // <== runs every 10 milliseconds
-        
-    });
 
 
+        eventos[i].addEventListener("mouseup", (event) => {
 
-    arriba.addEventListener("mouseup", () => {
-        
-        window.clearInterval(upInterval);
-        socket.emit("arriba",{"mensaje": "Botón Arriba libre","estado": false});
+            emitirFinal(event, intervalDirection[j], i);
 
-        
-    });
+        });
 
+        eventos[i].addEventListener("mouseout", (event) => {
 
-    //IZQUIERDA
+            emitirFinal(event, intervalDirection[j], i);
 
+        });
+        //FOR SMARTHPHONE
+        eventos[i].addEventListener("touchstart", (e) =>
+            intervalDirection[j] = window.setInterval((event) => emitirInicio(event, i), 100), false);
 
-    izquierda.addEventListener("mousedown", () => {
 
-        var tiempo = 0;
 
-        leftInterval = window.setInterval(function () {
+        eventos[i].addEventListener("touchend", (event) => {
 
-            socket.emit("izquierda",{"mensaje": "Botón izquierda " + tiempo +"ms","estado": true});          
-            tiempo+=100;
-        }, 100); // <== runs every 10 milliseconds
-        
-    });
+            emitirFinal(event, intervalDirection[j], i);
 
+        });
 
+        eventos[i].addEventListener("touchcancel", (event) => {
 
-    izquierda.addEventListener("mouseup", () => {
-        
-        window.clearInterval(leftInterval);
-        socket.emit("izquierda",{"mensaje": "Botón izquierda libre","estado": false});
+            emitirFinal(event, intervalDirection[j], i);
 
-        
-    });
+        });
 
-    izquierda.addEventListener("touchstart", () => {
-
-        var tiempo = 0;
-
-        TleftInterval = window.setInterval(function () {
-
-            socket.emit("izquierda",{"mensaje": "Botón izquierda " + tiempo +"ms","estado": true});          
-            tiempo+=100;
-        }, 100); // <== runs every 10 milliseconds
-        
-    });
-
-
-
-    izquierda.addEventListener("touchend", () => {
-        
-        window.clearInterval(TleftInterval);
-        socket.emit("izquierda",{"mensaje": "Botón izquierda libre","estado": false});
-
-        
-    });
-
-
-
-
-    //DERECHA
-    derecha.addEventListener("mousedown", () => {
-
-        var tiempo = 0;
-
-        rightInterval = window.setInterval(function () {
-
-            socket.emit("derecha",{"mensaje": "Botón derecha " + tiempo +"ms","estado": true});           
-            tiempo+=100;
-        }, 100); // <== runs every 10 milliseconds
-        
-    });
-
-
-
-    derecha.addEventListener("mouseup", () => {
-        
-        window.clearInterval(rightInterval);
-        socket.emit("derecha",{"mensaje": "Botón derecha libre","estado": false});
-
-        
-    });
-    derecha.addEventListener("touchstart", () => {
-
-        var tiempo = 0;
-
-        TrightInterval = window.setInterval(function () {
-
-            socket.emit("derecha",{"mensaje": "Botón derecha " + tiempo +"ms","estado": true});           
-            tiempo+=100;
-        }, 100); // <== runs every 10 milliseconds
-        
-    });
-
-
-
-    derecha.addEventListener("touchend", () => {
-        
-        window.clearInterval(TrightInterval);
-        socket.emit("derecha",{"mensaje": "Botón derecha libre","estado": false});
-
-        
-    });
-
-
- 
-
-
-    //ABAJO
-    abajo.addEventListener("mousedown", () => {
-
-        var tiempo = 0;
-
-        downInterval = window.setInterval(function () {
-
-            socket.emit("abajo",{"mensaje": "Botón abajo " + tiempo +"ms","estado": true});           
-            tiempo+=100;
-        }, 100); // <== runs every 10 milliseconds
-        
-    });
-
-
-
-    abajo.addEventListener("mouseup", () => {
-        
-        window.clearInterval(downInterval);
-        socket.emit("abajo",{"mensaje": "Botón abajo libre","estado": false});
-
-        
-    });
-    abajo.addEventListener("touchstart", () => {
-
-        var tiempo = 0;
-
-        TdownInterval = window.setInterval(function () {
-
-            socket.emit("abajo",{"mensaje": "Botón abajo " + tiempo +"ms","estado": true});           
-            tiempo+=100;
-        }, 100); // <== runs every 10 milliseconds
-        
-    });
-
-
-
-    abajo.addEventListener("touchend", () => {
-        
-        window.clearInterval(TdownInterval);
-        socket.emit("abajo",{"mensaje": "Botón abajo libre","estado": false});
-
-        
-    });
-
+        j++;
+    }
 
 });
