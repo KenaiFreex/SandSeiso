@@ -1,104 +1,91 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-<title>Sand Seiso</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/main.css">
+	<head>
+		<title>SandSeiso ||  Admin</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/css/admin.css" />
+	 	<link rel="stylesheet" href="/css/main.css" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-<!-- include socket.io client side script -->
+		<script src="/js/socket.io.js"></script>
+		<!-- include socket.io client side script -->
+	</head>
+	<body class="is-preload">
 
-<body class="w3-light-grey">
+		<!-- Wrapper -->
+			<div id="wrapper">
 
-  <!-- Top container -->
-  <div class="w3-bar w3-top w3-black w3-large">
-    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i
-        class="fa fa-bars"></i>  Menú</button>
-    <span class="w3-bar-item w3-right">SandSeiso</span>
-  </div>
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
 
-  <!-- Sidebar/menu -->
-  <nav class="w3-sidebar w3-collapse w3-white w3-animate-left"  id="mySidebar"><br>
-    <div class="w3-container w3-row">
-      <div class="w3-col s4">
-        <img src="/img/logo.png" alt="SandLogo" class="w3-circle w3-margin-right" >
-      </div>
+						
+							<!-- Header 
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+									<ul class="icons">
+										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
+									</ul>
+								</header> -->
+				
+								{{{body}}}
 
-      <div class="w3-col s8 w3-bar">
-        <span><strong>SandSeiso</strong></span><br>
-        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
-        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
-        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
-      </div>
+						</div>
+					</div>
 
-    </div>
-    <hr>
-    <div class="w3-container">
-      <h5> <strong>Administrador</strong> </h5>
-    </div>
-    <div class="w3-bar-block">
-      <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
-        onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Cerrar Menu</a>
-      <a href="/" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-diamond fa-fw"></i>  Inicio</a>
-      <a href="/control-manual" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Control
-        Manual</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Control Automático</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Análiticos</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Contacto</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  Manual</a>
-      <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Ajustes</a><br><br>
-    </div>
-  </nav>
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
 
 
-  <!-- Overlay effect when opening sidebar on small screens -->
-  <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()"
-    title="close side menu" id="myOverlay"></div>
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="/">Inicio</a></li>
+										<li><a href="/control-manual">Control Manual</a></li>
+										<li>
+											<span class="opener">Pruebas</span>
+											<ul>
+												<li><a href="#">Movilidad</a></li>
+												<li><a href="#">Conectividad</a></li>
+												<li><a href="#">Visión</a></li>
+												<li><a href="#">Hardware</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Análiticos</a></li>
+										<li><a href="#">Contacto</a></li>
+										<li><a href="#">Manual de Uso</a></li>
+									</ul>
+								</nav>
 
-  <!-- !PAGE CONTENT! -->
-  <div class="w3-main">
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; SandSeiso. All rights reserved. Design: <a target="_blank"  href="https://html5up.net">HTML5 UP</a>. and : <a target = "_blank"  href="https://kenaihub.com">Erick Torres</a>. </p>
+								</footer>
 
- 
+						</div>
+					</div>
 
-    {{{body}}}
+			</div>
 
-    <!-- Footer -->
-    <footer class="w3-container w3-padding-16 w3-light-grey">
-      <h4>FOOTER</h4>
-      <p>Powered by Kenai el Oso</p>
-    </footer>
+		<!-- Scripts -->
+			<script src="/js/jquery.min.js"></script>
+			<script src="/js/browser.min.js"></script>
+			<script src="/js/breakpoints.min.js"></script>
+			<script src="/js/util.js"></script>
+			<script src="/js/main.js"></script>
 
-    <!-- End page content -->
-  </div>
-
-  <script>
-    // Get the Sidebar
-    var mySidebar = document.getElementById("mySidebar");
-
-    // Get the DIV with overlay effect
-    var overlayBg = document.getElementById("myOverlay");
-
-    // Toggle between showing and hiding the sidebar, and add overlay effect
-    function w3_open() {
-      if (mySidebar.style.display === 'block') {
-        mySidebar.style.display = 'none';
-        overlayBg.style.display = "none";
-      } else {
-        mySidebar.style.display = 'block';
-        overlayBg.style.display = "block";
-      }
-    }
-
-    // Close the sidebar with the close button
-    function w3_close() {
-      mySidebar.style.display = "none";
-      overlayBg.style.display = "none";
-    }
-  </script>
-
-</body>
-
+	</body>
 </html>
