@@ -12,9 +12,29 @@ window.addEventListener("load", function () {
         "abajo": document.getElementById("abajo"),
     };
 
+    var disableButton = (event,boton) =>{
 
-    var emitirFinal = (event, eventInterval, boton) => {
+        for(let i in eventos){
 
+            if(eventos[i] != boton){
+                eventos[i].disabled = true;
+            }
+
+        }
+
+    };
+
+    var enableButton = (event,boton) =>{
+
+        for(let i in eventos){
+
+              eventos[i].disabled = false;
+            
+        }
+
+    };
+    var emitirFinal = (event, eventInterval, boton,touch) => {
+     
         window.clearInterval(eventInterval);
         socket.emit(boton, {
             "mensaje": "Botón " + boton + " libre",
@@ -25,8 +45,8 @@ window.addEventListener("load", function () {
     };
 
 
-    var emitirInicio = (event, boton) => {
-
+    var emitirInicio = (event, boton,touch) => {
+       
         socket.emit(boton, {
             "mensaje": "Botón " + boton + " " + tiempo + "ms",
             "estado": true,
@@ -41,36 +61,36 @@ window.addEventListener("load", function () {
     for (let i in eventos) {
         //FOR PC
         eventos[i].addEventListener("mousedown", (e) =>
-            intervalDirection[j] = window.setInterval((event) => emitirInicio(event, i), 100), false);
+            intervalDirection[j] = window.setInterval((event) => emitirInicio(event, i,false), 100), false);
 
 
 
         eventos[i].addEventListener("mouseup", (event) => {
 
-            emitirFinal(event, intervalDirection[j], i);
+            emitirFinal(event, intervalDirection[j], i,false);
 
         });
 
         eventos[i].addEventListener("mouseout", (event) => {
 
-            emitirFinal(event, intervalDirection[j], i);
+            emitirFinal(event, intervalDirection[j], i,false);
 
         });
         //FOR SMARTHPHONE
         eventos[i].addEventListener("touchstart", (e) =>
-            intervalDirection[j] = window.setInterval((event) => emitirInicio(event, i), 100), false);
+            intervalDirection[j] = window.setInterval((event) => emitirInicio(event, i,true), 100), false);
 
 
 
         eventos[i].addEventListener("touchend", (event) => {
 
-            emitirFinal(event, intervalDirection[j], i);
+            emitirFinal(event, intervalDirection[j], i,true);
 
         });
 
         eventos[i].addEventListener("touchcancel", (event) => {
 
-            emitirFinal(event, intervalDirection[j], i);
+            emitirFinal(event, intervalDirection[j], i),true;
 
         });
 

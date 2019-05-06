@@ -7,6 +7,10 @@ const exphbs = require('express-handlebars');
 var fs = require('fs'); 
 var direction = require("./sockets/ManualControl/direction.js");
 
+require('./database');
+
+
+const PORT = 80;
 
 const io = require('socket.io')(server);
 
@@ -39,9 +43,9 @@ app.use(require('./routes/index.js'));
 //--------------------------------//
 /////////////ESCUCHANDO/////////////////
 //------------------------------//
-server.listen(80, () => {
+server.listen(PORT, () => {
 
-  console.log('Escuchando en puerto 3000');
+  console.log(`Escuchando en puerto ${PORT}`);
 
 });
 const paso = 5;

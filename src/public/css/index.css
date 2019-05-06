@@ -1,0 +1,19 @@
+
+.logo-container{
+    position: relative; 
+    width: auto; 
+    padding-bottom: 80%; 
+    overflow: hidden;
+       
+
+}
+
+.logo{
+    position: absolute; 
+    height: 90%; 
+    width: 80%; 
+    top: 1%;
+    left: 10%;
+       
+
+}
