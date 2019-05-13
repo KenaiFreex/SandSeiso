@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1/seiso', {
+mongoose.set('useFindAndModify', false);
+mongoose.connect('mongodb://localhost/seiso', {
   useCreateIndex: true,
-  useNewUrlParser: true,
-  useFindAndModify: false
+  useNewUrlParser: true
 })
   .then(db => console.log('DB is connected'))
   .catch(err => console.error(err));

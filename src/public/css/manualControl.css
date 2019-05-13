@@ -4,10 +4,11 @@ display: grid;
 grid-template-columns: repeat(1,1fr);
 grid-gap: 1%;
 grid-auto-rows: minmax(50px, auto);
-width: 100%;
-height: 75vh;
-
-
+width: calc(100vw - 10%);
+height: calc(100vh - 89px);
+margin-top: 5%;
+margin-left: 10%;
+padding: 0;
 }
 
 .section2{
@@ -21,7 +22,6 @@ grid-gap: 2%;
 .grid > div{
 
     background: #eeeeee;
-    padding: 1em;
    /* border:1px red solid;*/
     margin: 0 auto;
     width: 99%;

@@ -1,18 +1,15 @@
 const express = require('express');
 const router = express.Router();
+// Models
 
-router.get('/control-manual', (req, res) => {
+// Helpers
+const { isAuthenticated } = require('../helpers/auth');
+
+router.get('/control-manual', isAuthenticated, (req, res) => {
 
     res.render('Control-manual/manualDirection');
   
   
   });
   
-  router.get('/prueba', (req, res) => {
-  
-    res.render('Control-manual/socket-prueba');
-  
-  
-  });
-
   module.exports = router;
