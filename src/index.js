@@ -13,6 +13,15 @@ const direction = require("./sockets/ManualControl/direction.js");
 
 const io = require('socket.io')(server);
 
+var util  = require('util'),
+    spawn = require('child_process').spawn,
+    ls    = spawn('python', ['./python/Evasor-Objetos/evasor.py']);
+
+
+
+
+
+
 require('./database');
 require('./config/passport');
 
@@ -64,6 +73,9 @@ app.use(require('./routes'));
 app.use(require('./routes/users'));
 app.use(require('./routes/manual'));
 app.use(require('./routes/index'));
+app.use(require('./routes/evasion'));
+
+
 
 
 //--------------------------------//
@@ -74,7 +86,6 @@ server.listen(app.get('port'), () => {
   console.log(`Escuchando en puerto ${app.get('port')}`);
 
 });
-
 
 
 
@@ -108,10 +119,15 @@ io.sockets.on('connection', function (socket) { // WebSocket Connection
     tiempo = (data.tiempo/1000)*10;
     let pwmLevel = (tiempo*paso<0)?0:(tiempo*paso>255)?255:tiempo*paso;
     direction.ActivarGPIO("abajo", pwmLevel , data);
-    
+
+ 
   });
 
-
+   ls.stdout.on('data', function(data) {
+      console.log(data.toString());
+      socket.emit('evasion',data.toString());
+  });
+    
 
 
 });

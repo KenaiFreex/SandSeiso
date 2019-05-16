@@ -77,7 +77,7 @@ function ActivarGPIO(direccion,pwmLevel, data) {
             //motor2
             "R_EN1": 255,
             "L_EN1": 255,
-            "RPWM1": pwmLevel,
+            "RPWM1": 255,
             "LPWM1": 0,
         } :
         (direccion == "izquierda") ? {
@@ -85,7 +85,7 @@ function ActivarGPIO(direccion,pwmLevel, data) {
             "R_EN0": 255,
             'L_EN0': 255,
             "RPWM0": 0,
-            "LPWM0": pwmLevel,
+            "LPWM0": 255,
             //motor2
             "R_EN1": 255,
             "L_EN1": 255,
