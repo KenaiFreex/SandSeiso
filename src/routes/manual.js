@@ -5,7 +5,7 @@ const router = express.Router();
 // Helpers
 const { isAuthenticated } = require('../helpers/auth');
 
-router.get('/control-manual', isAuthenticated, (req, res) => {
+router.get('/control-manual', (req, res) => {
 
     res.render('Control-manual/manualDirection');
   

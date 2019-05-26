@@ -4,9 +4,7 @@ display: grid;
 grid-template-columns: repeat(1,1fr);
 grid-gap: 1%;
 grid-auto-rows: minmax(50px, auto);
-width: calc(100vw - 10%);
-height: calc(100vh - 89px);
-margin-top: 5%;
+height: calc(100vh - 85px);
 margin-left: 10%;
 padding: 0;
 }
@@ -15,13 +13,15 @@ padding: 0;
 
 display: grid;
 grid-template-columns: repeat(2,1fr);
-grid-gap: 2%;
+grid-gap: 1%;
+background: transparent;
+vertical-align: middle;
+
 
 }
 
 .grid > div{
 
-    background: #eeeeee;
    /* border:1px red solid;*/
     margin: 0 auto;
     width: 99%;
@@ -30,31 +30,34 @@ grid-gap: 2%;
 
 }
 
-.grid > div:nth-child(odd){
-
-    background: #dddddd;
-
-
-} 
 
 .btn{
     width:100%;
-    height: 100%;
-    padding: 0%;
+    padding: 1%;
     bottom: 0;
     display: block;
+    vertical-align: middle;
+    text-align: center;
+    height: 100%;
+
 
 }
 
 .buttonBox {
-
-    padding: 0;
+    border: 2px solid rgb(173, 140, 33);
+    background: #ffffff;
+    padding: 2px;
     margin: 0 auto;
-   /* border: 3px green solid;*/
     width: 100%;
     height: 100%;
     margin: 0 auto;
+    vertical-align: middle;
+    text-align: center;
 
+}
+
+.buttonBox:active {
+    background: rgba(80, 79, 72, 0.377);
 }
 
 .section1{
@@ -64,4 +67,8 @@ grid-gap: 2%;
 
 };
 
-             
+.btn-text{
+
+    height: 100%;
+
+}
