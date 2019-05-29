@@ -16,8 +16,6 @@ window.addEventListener("load", function () {
 
     var emitirFinal = (event, eventInterval, boton,touch) => {
 
-
-       
         window.clearInterval(eventInterval);
         socket.emit(boton, {
             "mensaje": "Botón " + boton + " libre",
@@ -89,10 +87,3 @@ window.addEventListener("load", function () {
 });
 
 
-window.ontouchstart = function(event) {
-    document.getElementById("boton-pressed").innerHTML = "touch";
-
-    if (event.touches.length>1) { //If there is more than one touch
-        event.preventDefault();
-    }
-}
