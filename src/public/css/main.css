@@ -40,6 +40,15 @@ body {
 
 #accordionSidebar{
 
-    background: #50230941;
+    background: #5023096c;
 
+}
+
+.collapse-inner{
+
+    background: #50230957;
+}
+
+.collapse-item{
+    color: white;
 }

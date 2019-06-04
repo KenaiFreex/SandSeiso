@@ -73,8 +73,7 @@ app.use(require('./routes'));
 app.use(require('./routes/users'));
 app.use(require('./routes/manual'));
 app.use(require('./routes/index'));
-app.use(require('./routes/evasion'));
-
+app.use(require('./routes/config'));
 
 
 
@@ -101,7 +100,7 @@ io.sockets.on('connection', function (socket) { // WebSocket Connection
     let pwmLevel_L = NivelPWM(data,5,100,255);
     let pwmLevel_R = NivelPWM(data,5,100,255);
 
-    direction.ActivarGPIO("arriba", 200,255 , data);
+    direction.ActivarGPIO("arriba", 255,255 , data);
 
   });
 
@@ -109,20 +108,20 @@ io.sockets.on('connection', function (socket) { // WebSocket Connection
 
     let pwmLevel_L = NivelPWM(data,5,100,255);
     let pwmLevel_R = NivelPWM(data,5,100,255);  
-    direction.ActivarGPIO("izquierda", 200, 255,data);
+    direction.ActivarGPIO("izquierda", 255, 255,data);
 
   });
   socket.on("derecha", (data) => {
 
     let pwmLevel_L = NivelPWM(data,5,100,255);
     let pwmLevel_R = NivelPWM(data,5,100,255);
-    direction.ActivarGPIO("derecha", 200, 255, data);
+    direction.ActivarGPIO("derecha", 255, 255, data);
   });
   socket.on("abajo", (data) => {
 
     let pwmLevel_L = NivelPWM(data,5,100,255);
     let pwmLevel_R = NivelPWM(data,5,100,255);
-    direction.ActivarGPIO("abajo", 200,255, data);
+    direction.ActivarGPIO("abajo", 255,255, data);
     
   });
 

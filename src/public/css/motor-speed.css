@@ -1,0 +1,53 @@
+.grid-layout-3{
+
+display: grid;
+grid-template-columns: repeat(3,1fr);
+grid-gap: 1%;
+grid-auto-rows: minmax(50px, auto);
+height: calc(100vh - 85px);
+margin-left: 10%;
+padding: 0;
+
+
+}
+
+.grid-layout-2{
+
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 1%;
+    grid-auto-rows: minmax(50px, auto);
+    height: calc(100vh - 85px);
+    margin-left: 10%;
+    padding: 0;
+    
+    
+    }
+
+.form-arrows{
+
+display: grid;
+grid-template-columns: 2fr 1fr 1fr;
+background: transparent;
+}
+
+.arrows{
+
+ display: grid;
+ grid-template-columns: repeat(1,1fr);
+ background: transparent;
+
+}
+
+.text-input{
+    display: table;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+
+}
+
+.updownbox{
+
+    width: 30%;
+}
