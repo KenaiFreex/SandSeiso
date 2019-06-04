@@ -7,7 +7,7 @@ const Gpio = require('pigpio').Gpio;
 
 const LED = {
     //Relés
-    "R0": new Gpio(16, {
+    "R0": new Gpio(11, {
         mode: Gpio.OUTPUT
     }),
     "R1": new Gpio(13, {
@@ -21,30 +21,30 @@ const LED = {
     }),
 
     //motor1
-    "R_EN0": new Gpio(21, {
+    "R_EN0": new Gpio(14, {
         mode: Gpio.OUTPUT
     }),
-    'L_EN0': new Gpio(20, {
+    'L_EN0': new Gpio(13, {
         mode: Gpio.OUTPUT
     }),
-    "RPWM0": new Gpio(26, {
+    "RPWM0": new Gpio(23, {
         mode: Gpio.OUTPUT
     }),
-    "LPWM0": new Gpio(19, {
+    "LPWM0": new Gpio(24, {
         mode: Gpio.OUTPUT
     }),
 
     //motor2
-    "R_EN1": new Gpio(24, {
+    "R_EN1": new Gpio(17, {
         mode: Gpio.OUTPUT
     }),
-    "L_EN1": new Gpio(23, {
+    "L_EN1": new Gpio(18, {
         mode: Gpio.OUTPUT
     }),
-    "RPWM1": new Gpio(17, {
+    "RPWM1": new Gpio(16, {
         mode: Gpio.OUTPUT
     }),
-    "LPWM1": new Gpio(18, {
+    "LPWM1": new Gpio(20, {
         mode: Gpio.OUTPUT
     }),
 
@@ -128,10 +128,10 @@ function ActivarGPIO(direccion,pwmLevel_L, pwmLevel_R, data) {
         } : {
 
             //Relés
-            "R0": 255,
-            "R1": 255,
-            "R2": 255,
-            "R3": 255,
+            "R0": 0,
+            "R1": 0,
+            "R2": 0,
+            "R3": 0,
             //motor1
             "R_EN0": 0,
             'L_EN0': 0,

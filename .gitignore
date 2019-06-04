@@ -36,6 +36,8 @@ build/Release
 node_modules/
 jspm_packages/
 
+.vscode/
+
 # TypeScript v1 declaration files
 typings/
 
@@ -62,3 +64,4 @@ typings/
 
 security/
 package-lock.json
+

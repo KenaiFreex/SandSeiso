@@ -101,7 +101,7 @@ io.sockets.on('connection', function (socket) { // WebSocket Connection
     let pwmLevel_L = NivelPWM(data,5,100,255);
     let pwmLevel_R = NivelPWM(data,5,100,255);
 
-    direction.ActivarGPIO("arriba", pwmLevel_L,pwmLevel_R , data);
+    direction.ActivarGPIO("arriba", 200,255 , data);
 
   });
 
@@ -109,20 +109,20 @@ io.sockets.on('connection', function (socket) { // WebSocket Connection
 
     let pwmLevel_L = NivelPWM(data,5,100,255);
     let pwmLevel_R = NivelPWM(data,5,100,255);  
-    direction.ActivarGPIO("izquierda", pwmLevel_L, pwmLevel_R,data);
+    direction.ActivarGPIO("izquierda", 200, 255,data);
 
   });
   socket.on("derecha", (data) => {
 
     let pwmLevel_L = NivelPWM(data,5,100,255);
     let pwmLevel_R = NivelPWM(data,5,100,255);
-    direction.ActivarGPIO("derecha", pwmLevel_L, pwmLevel_R, data);
+    direction.ActivarGPIO("derecha", 200, 255, data);
   });
   socket.on("abajo", (data) => {
 
     let pwmLevel_L = NivelPWM(data,5,100,255);
     let pwmLevel_R = NivelPWM(data,5,100,255);
-    direction.ActivarGPIO("abajo", pwmLevel_L,pwmLevel_R, data);
+    direction.ActivarGPIO("abajo", 200,255, data);
     
   });
 
@@ -135,9 +135,6 @@ io.sockets.on('connection', function (socket) { // WebSocket Connection
 function NivelPWM(data,paso,inicioPWM,finPWM){
 
   tiempo = (data.tiempo/1000)*10;
-  Nivelpwm = (tiempo*paso<inicioPWM)?inicioPWM:(tiempo*paso>finPWM)?finPWM:tiempo*paso;
-  
-
-  return 
+  return (tiempo*paso<inicioPWM)?inicioPWM:(tiempo*paso>finPWM)?finPWM:tiempo*paso;
 
 }
