@@ -1,5 +1,5 @@
 //const Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-const Gpio = require('pigpio').Gpio;
+/* const Gpio = require('pigpio').Gpio;
 
 
 
@@ -172,6 +172,22 @@ function ActivarGPIO(direccion,pwmLevel_L, pwmLevel_R, data) {
 
 
 };
+*/
+
+
+ActivarGPIO = (direccion,pwmLevel_L, pwmLevel_R, data) => {
+
+    let datos = data.mensaje;
+    let estado = data.estado;
+
+
+
+    
+    console.log(datos);
+    console.log(estado);
+
+
+}
 
 module.exports.ActivarGPIO = ActivarGPIO;
 

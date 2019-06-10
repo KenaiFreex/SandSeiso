@@ -13,12 +13,18 @@ const direction = require("./sockets/ManualControl/direction.js");
 
 const io = require('socket.io')(server);
 
-var util  = require('util'),
-    spawn = require('child_process').spawn,
-    ls    = spawn('python', ['./python/Evasor-Objetos/evasor.py']);
 
+var NodeWebcam = require("node-webcam");
 
-
+var Webcam = NodeWebcam.create({
+  callbackReturn: "base64",
+  saveShots: false,
+  width: 640,
+  height: 360,
+  quality: 0,
+  device: '/dev/video0',
+ 
+});
 
 
 
@@ -45,7 +51,9 @@ app.set('view engine', '.hbs');
 
 
 // middlewares
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(methodOverride('_method'));
 app.use(session({
   secret: 'secret',
@@ -92,48 +100,58 @@ server.listen(app.get('port'), () => {
 //--------------------------------//
 /////////////WebSOckets/////////////////
 //------------------------------//
+
+
+var activeFlag = false;
+
 io.sockets.on('connection', function (socket) { // WebSocket Connection
 
-  socket.on("arriba", (data) => {
+  socket.on("direccion", (data) => {
 
+    let contador = 0;
+    for (let i in data.flag) {
 
-    let pwmLevel_L = NivelPWM(data,5,100,255);
-    let pwmLevel_R = NivelPWM(data,5,100,255);
+      if (data.flag[i]) {
 
-    direction.ActivarGPIO("arriba", 255,255 , data);
+        contador++;
+      }
+    }
+
+    if (contador <= 1) {
+
+      for (let i in data.flag) {
+
+        if (data.flag[i]) {
+
+          //console.log(`${i} ALTO`);
+
+        }
+        if (!data.flag[i]) {
+
+          //console.log(`${i} BAJO`);
+        }
+
+      }
+
+    } else {
+
+      console.log("No permitido");
+
+    }
 
   });
 
-  socket.on("izquierda", (data) => {
+  socket.on("online", (data) => {
 
-    let pwmLevel_L = NivelPWM(data,5,100,255);
-    let pwmLevel_R = NivelPWM(data,5,100,255);  
-    direction.ActivarGPIO("izquierda", 255, 255,data);
+
+    Webcam.capture("test", (err, data) => {
+
+      socket.emit("webcam", data);
+
+    });
 
   });
-  socket.on("derecha", (data) => {
-
-    let pwmLevel_L = NivelPWM(data,5,100,255);
-    let pwmLevel_R = NivelPWM(data,5,100,255);
-    direction.ActivarGPIO("derecha", 255, 255, data);
-  });
-  socket.on("abajo", (data) => {
-
-    let pwmLevel_L = NivelPWM(data,5,100,255);
-    let pwmLevel_R = NivelPWM(data,5,100,255);
-    direction.ActivarGPIO("abajo", 255,255, data);
-    
-  });
-
 
 
 
 });
-
-
-function NivelPWM(data,paso,inicioPWM,finPWM){
-
-  tiempo = (data.tiempo/1000)*10;
-  return (tiempo*paso<inicioPWM)?inicioPWM:(tiempo*paso>finPWM)?finPWM:tiempo*paso;
-
-}
